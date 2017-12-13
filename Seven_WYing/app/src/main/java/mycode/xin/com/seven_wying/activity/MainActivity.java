@@ -1,4 +1,4 @@
-package mycode.xin.com.seven_wying;
+package mycode.xin.com.seven_wying.activity;
 
 import android.support.v4.app.Fragment;
 
@@ -14,6 +14,7 @@ import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import mycode.xin.com.seven_wying.R;
 import mycode.xin.com.seven_wying.fragmetns.ChoicenessFragment;
 import mycode.xin.com.seven_wying.fragmetns.DiscoverFragment;
 import mycode.xin.com.seven_wying.fragmetns.MineFragment;
