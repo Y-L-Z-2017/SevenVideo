@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import io.reactivex.disposables.Disposable;
 
 /**
@@ -18,6 +20,7 @@ import io.reactivex.disposables.Disposable;
 public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragment {
     T presenter;
     View mView;
+    private Unbinder bind;
 
     @Nullable
     @Override
@@ -25,6 +28,7 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragme
         if (mView == null) {
              mView = inflater.inflate(setLayout(), container, false);
             bridge();
+            bind = ButterKnife.bind(getActivity());
             presenter = getPresenter();
         }
         if (presenter != null) {
@@ -50,5 +54,6 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragme
     public void onDestroy() {
         super.onDestroy();
         presenter.disAttch();
+        bind.unbind();
     }
 }

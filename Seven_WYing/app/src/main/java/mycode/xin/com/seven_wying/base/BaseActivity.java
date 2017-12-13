@@ -8,12 +8,16 @@ import android.view.View;
 
 import java.lang.ref.WeakReference;
 
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 /**
  * date:2017/12/12  20:33
  * author:Mr.XIn💕
  */
 public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCompatActivity {
     T presenter;
+    private Unbinder bind;
 
 
     @Override
@@ -21,6 +25,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
         super.onCreate(savedInstanceState);
         setContentView(setLayout());
         bridge();
+        bind = ButterKnife.bind(this);
         presenter = getPresenter();
         if (presenter != null) {
             presenter.attch((V) this);
@@ -44,6 +49,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     public void onDestroy() {
         super.onDestroy();
         presenter.disAttch();
+        bind.unbind();
     }
 }
 

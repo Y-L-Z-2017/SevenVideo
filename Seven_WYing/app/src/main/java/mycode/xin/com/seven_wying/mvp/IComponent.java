@@ -13,7 +13,6 @@ import mycode.xin.com.seven_wying.fragmetns.SpecialFragment;
  * author:Mr.XIn💕
  */
 @Component(modules = IModule.class)
-
 public interface IComponent {
 
     void inject(MainActivity mainActivity);
