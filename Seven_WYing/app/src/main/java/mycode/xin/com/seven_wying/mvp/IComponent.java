@@ -2,7 +2,7 @@ package mycode.xin.com.seven_wying.mvp;
 
 
 import dagger.Component;
-import mycode.xin.com.seven_wying.MainActivity;
+import mycode.xin.com.seven_wying.activity.MainActivity;
 import mycode.xin.com.seven_wying.fragmetns.ChoicenessFragment;
 import mycode.xin.com.seven_wying.fragmetns.DiscoverFragment;
 import mycode.xin.com.seven_wying.fragmetns.MineFragment;
