@@ -15,9 +15,9 @@ import butterknife.Unbinder;
  * date:2017/12/12  20:33
  * author:Mr.XIn💕
  */
-public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCompatActivity {
+   public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCompatActivity {
     T presenter;
-    private Unbinder bind;
+      private Unbinder bind;
 
 
     @Override

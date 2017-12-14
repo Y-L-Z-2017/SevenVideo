@@ -46,12 +46,11 @@ public class MainActivity extends AppCompatActivity {
             mChoicenessFragment = new ChoicenessFragment();
         }
         changeFragment(mChoicenessFragment);
-//        mBnb.setBackgroundResource(R.drawable.bottom_bg);
 
         mBnb.setMode(BottomNavigationBar.MODE_FIXED)
                 .setActiveColor("#FFFF0000")
                 .setInActiveColor("#B3B3B3")
-                .addItem(new BottomNavigationItem(R.drawable.found_select, "精选")//这里表示选中的图片
+                .addItem(new BottomNavigationItem(R.drawable.found_select, "精选")
                         .setInactiveIconResource(R.drawable.found))
                 .addItem(new BottomNavigationItem(R.drawable.special_select, "专题")
                         .setInactiveIconResource(R.drawable.special))
