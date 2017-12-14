@@ -20,7 +20,7 @@ import io.reactivex.disposables.Disposable;
 public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragment {
     T presenter;
     View mView;
-    private Unbinder bind;
+   private Unbinder bind;
 
     @Nullable
     @Override
@@ -54,6 +54,6 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragme
     public void onDestroy() {
         super.onDestroy();
         presenter.disAttch();
-        bind.unbind();
+       bind.unbind();
     }
 }
