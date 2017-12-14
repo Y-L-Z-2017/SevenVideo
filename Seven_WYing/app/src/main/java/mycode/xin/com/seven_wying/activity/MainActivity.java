@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
             mChoicenessFragment = new ChoicenessFragment();
         }
         changeFragment(mChoicenessFragment);
-//        mBnb.setBackgroundResource(R.drawable.bottom_bg);
+
 
         mBnb.setMode(BottomNavigationBar.MODE_FIXED)
                 .setActiveColor("#FFFF0000")
