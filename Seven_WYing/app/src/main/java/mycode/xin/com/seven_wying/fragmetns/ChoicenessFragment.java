@@ -1,5 +1,6 @@
 package mycode.xin.com.seven_wying.fragmetns;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -8,11 +9,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+
+import java.io.Serializable;
 
 import javax.inject.Inject;
 
 import mycode.xin.com.seven_wying.R;
+import mycode.xin.com.seven_wying.activity.VideoActivity;
+import mycode.xin.com.seven_wying.bean.Video;
 import mycode.xin.com.seven_wying.mvp.choiceness.JpAdapter;
 import mycode.xin.com.seven_wying.base.BaseFragment;
 import mycode.xin.com.seven_wying.bean.HomeBean;
@@ -103,8 +109,19 @@ public class ChoicenessFragment extends BaseFragment<ChoicenessView,ChoicenessPr
     }
 
     @Override
-    public void showData(HomeBean bean) {
+    public void showData(final HomeBean bean) {
         JpAdapter adapter=new JpAdapter(getActivity(),bean,bean.getRet().getList().get(4).getChildList());
         recyclerView.setAdapter(adapter);
+        adapter.setListener(new JpAdapter.OnClickListener() {
+            @Override
+            public void Onclck(int position) {
+                Toast.makeText(getActivity(), "点击"+position, Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(getActivity(), VideoActivity.class);
+                HomeBean.RetBean.ListBean.ChildListBean v = bean.getRet().getList().get(4).getChildList().get(position-1);
+                Video video=new Video(v.getAirTime(),v.getAngleIcon(),v.getDataId(),v.getDescription(),v.getDuration(),v.getLoadType(),v.getLoadURL(),v.getPic(),v.getRoomId(),v.getScore(),v.getShareURL(),v.getTitle());
+                intent.putExtra("bean", (Serializable) video);
+                startActivity(intent);
+            }
+        });
     }
 }
