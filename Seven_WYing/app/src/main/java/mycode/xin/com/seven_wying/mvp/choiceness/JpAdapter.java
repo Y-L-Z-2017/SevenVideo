@@ -8,9 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.youth.banner.Banner;
+import com.youth.banner.listener.OnBannerListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +31,7 @@ public class JpAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private HomeBean bean;
     private LayoutInflater inflater;
     private List<HomeBean.RetBean.ListBean.ChildListBean> childList;
+    public OnClickListener listener;
 
     public JpAdapter(Context context, HomeBean bean, List<HomeBean.RetBean.ListBean.ChildListBean> childList) {
         this.context = context;
@@ -45,7 +48,13 @@ public class JpAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             return holder1;
         }else if(viewType==1) {
             View view=inflater.inflate(R.layout.jp_item2,parent,false);
-            Holder2 holder2=new Holder2(view);
+            final Holder2 holder2=new Holder2(view);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.Onclck(holder2.getPosition());
+                }
+            });
             return holder2;
         }
         return null;
@@ -55,7 +64,7 @@ public class JpAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if(holder instanceof Holder1){
             List<String> list=new ArrayList<>();
-            List<HomeBean.RetBean.ListBean.ChildListBean> imagelist = bean.getRet().getList().get(0).getChildList();
+            final List<HomeBean.RetBean.ListBean.ChildListBean> imagelist = bean.getRet().getList().get(0).getChildList();
             for (int i=0;i<imagelist.size();i++){
                 list.add(imagelist.get(i).getPic());
                 Log.e("ada",imagelist.get(i).getPic());
@@ -63,6 +72,12 @@ public class JpAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ((Holder1) holder).banner.setImageLoader(new MyBanner());
             ((Holder1) holder).banner.setImages(list);
             ((Holder1) holder).banner.start();
+           ((Holder1) holder).banner.setOnBannerListener(new OnBannerListener() {
+               @Override
+               public void OnBannerClick(int position) {
+                   Toast.makeText(context, imagelist.get(position).getTitle(), Toast.LENGTH_SHORT).show();
+               }
+           });
         }else if(holder instanceof Holder2) {
             ((Holder2) holder).title.setText(childList.get(position-1).getTitle());
             Glide.with(context).load(childList.get(position-1).getPic()).into(((Holder2) holder).imageView);
@@ -92,5 +107,12 @@ public class JpAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             imageView=itemView.findViewById(R.id.slt);
             title=itemView.findViewById(R.id.tv_title);
         }
+    }
+    public interface OnClickListener{
+        void Onclck(int position);
+    }
+
+    public void setListener(OnClickListener listener) {
+        this.listener = listener;
     }
 }

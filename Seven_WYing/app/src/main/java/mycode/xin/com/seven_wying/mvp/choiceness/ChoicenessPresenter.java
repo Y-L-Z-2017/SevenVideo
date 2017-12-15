@@ -10,6 +10,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subscribers.DefaultSubscriber;
+import io.reactivex.subscribers.DisposableSubscriber;
 import mycode.xin.com.seven_wying.base.BasePresenter;
 import mycode.xin.com.seven_wying.bean.HomeBean;
 
@@ -28,9 +29,9 @@ public class ChoicenessPresenter extends BasePresenter<ChoicenessView> {
 
     public void getData(){
         Flowable<HomeBean> flowable = mChoicenessModel.getData();
-        DefaultSubscriber<HomeBean> subscriber = flowable.subscribeOn(Schedulers.io())
+        DisposableSubscriber<HomeBean> subscriber = flowable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DefaultSubscriber<HomeBean>() {
+                .subscribeWith(new DisposableSubscriber<HomeBean>() {
                     @Override
                     public void onNext(HomeBean bean) {
                         getView().showData(bean);
@@ -46,7 +47,8 @@ public class ChoicenessPresenter extends BasePresenter<ChoicenessView> {
 
                     }
                 });
-     //   add((Disposable) subscriber);
+        add(subscriber);
+
 
     }
 }
