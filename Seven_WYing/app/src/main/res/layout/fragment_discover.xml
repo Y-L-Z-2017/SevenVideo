@@ -14,5 +14,4 @@
         android:id="@+id/stack_layout"
         android:layout_width="match_parent"
         android:layout_height="500dp"/>
-
 </RelativeLayout>

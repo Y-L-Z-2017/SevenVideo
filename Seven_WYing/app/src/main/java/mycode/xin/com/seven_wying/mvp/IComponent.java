@@ -5,6 +5,8 @@ import dagger.Component;
 import mycode.xin.com.seven_wying.activity.MainActivity;
 import mycode.xin.com.seven_wying.fragmetns.ChoicenessFragment;
 import mycode.xin.com.seven_wying.fragmetns.DiscoverFragment;
+import mycode.xin.com.seven_wying.fragmetns.DiscussFragment;
+import mycode.xin.com.seven_wying.fragmetns.IntroFragment;
 import mycode.xin.com.seven_wying.fragmetns.MineFragment;
 import mycode.xin.com.seven_wying.fragmetns.SpecialFragment;
 
@@ -24,5 +26,10 @@ public interface IComponent {
     void injectDiscover(DiscoverFragment discoverFragment);
 
     void injectMine(MineFragment mineFragment);
+
+    void injectIntro(IntroFragment introFragment);
+
+    void injectDiscuss(DiscussFragment discoverFragment);
+
 
 }

@@ -1,6 +1,5 @@
-package mycode.xin.com.seven_wying.mvp.special;
+package mycode.xin.com.seven_wying.mvp.discuss;
 
-import mycode.xin.com.seven_wying.bean.IntroBean;
 import mycode.xin.com.seven_wying.bean.VideoRes;
 
 /**
@@ -9,7 +8,7 @@ import mycode.xin.com.seven_wying.bean.VideoRes;
  */
 
 
-public interface SpecialView {
+public interface DiscussView {
     void Success(VideoRes videoRes);
 
 }

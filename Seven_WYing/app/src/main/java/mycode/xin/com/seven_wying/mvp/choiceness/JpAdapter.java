@@ -113,6 +113,10 @@ public class JpAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     public void setListener(OnClickListener listener) {
+
         this.listener = listener;
     }
+
+
+
 }

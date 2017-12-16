@@ -1,4 +1,4 @@
-package mycode.xin.com.seven_wying.mvp.special;
+package mycode.xin.com.seven_wying.mvp.discuss;
 
 import javax.inject.Inject;
 
@@ -7,10 +7,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subscribers.DisposableSubscriber;
 import mycode.xin.com.seven_wying.base.BasePresenter;
-import mycode.xin.com.seven_wying.bean.IntroBean;
 import mycode.xin.com.seven_wying.bean.VideoRes;
-import mycode.xin.com.seven_wying.mvp.choiceness.ChoicenessModel;
-import mycode.xin.com.seven_wying.mvp.choiceness.ChoicenessView;
 
 /**
  * date:2017/12/12  22:45
@@ -18,15 +15,15 @@ import mycode.xin.com.seven_wying.mvp.choiceness.ChoicenessView;
  */
 
 
-public class SpecialPresenter extends BasePresenter<SpecialView> {
+public class DiscussPresenter extends BasePresenter<DiscussView> {
     @Inject
-    SpcialModel mSpcialModel;
+    DiscussModel mDiscussModel;
 
     @Inject
-    public SpecialPresenter() {
+    public DiscussPresenter() {
     }
-    public void getData(String id,String pum) {
-        Flowable<VideoRes> flowable = mSpcialModel.getDataSpecial(id,pum);
+    public void getData(String id) {
+        Flowable<VideoRes> flowable = mDiscussModel.getDataSpecial(id);
         DisposableSubscriber<VideoRes> disposableSubscriber = flowable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribeWith(
                 new DisposableSubscriber<VideoRes>() {
                     @Override

@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,9 +25,12 @@ import cn.jzvd.JZVideoPlayer;
 import cn.jzvd.JZVideoPlayerStandard;
 import mycode.xin.com.seven_wying.R;
 import mycode.xin.com.seven_wying.bean.Video;
+import mycode.xin.com.seven_wying.fragmetns.DiscussFragment;
+import mycode.xin.com.seven_wying.fragmetns.IntroFragment;
 
 public class VideoActivity extends AppCompatActivity {
 
+    private static final String TAG = "xxxx";
     @BindView(R.id.back)
     ImageView back;
     @BindView(R.id.video_name)
@@ -43,6 +47,10 @@ public class VideoActivity extends AppCompatActivity {
     private Unbinder bind;
     private List<String> list;
     private Video bean;
+    private List<Fragment> mFragmetns;
+    private Bundle mBundle;
+    private IntroFragment mIntroFragment;
+    private DiscussFragment mDiscussFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +59,9 @@ public class VideoActivity extends AppCompatActivity {
         bind = ButterKnife.bind(this);
         Intent intent = getIntent();
         bean = (Video) intent.getSerializableExtra("bean");
+
         ininView();
+
     }
 
     @Override
@@ -62,16 +72,31 @@ public class VideoActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if(JZVideoPlayer.backPress()){
+        if (JZVideoPlayer.backPress()) {
             return;
         }
         super.onBackPressed();
     }
 
     private void ininView() {
-        video.setUp(bean.getLoadURL(),JZVideoPlayerStandard.SCREEN_LAYOUT_NORMAL,bean.getTitle());
+        String url = bean.getLoadURL().substring(0, bean.getLoadURL().length() - 4);
+        url=url+"mp4";
+        video.setUp(url, JZVideoPlayerStandard.SCREEN_LAYOUT_NORMAL, bean.getTitle());
         Glide.with(this).load(bean.getPic()).into(video.thumbImageView);
         video.thumbImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        mIntroFragment = new IntroFragment();
+        mDiscussFragment = new DiscussFragment();
+
+        mBundle = new Bundle();
+        mBundle.putString("Id", bean.getDataId());
+        Log.e(TAG, mBundle.getString("Id"));
+        mIntroFragment.setArguments(mBundle);
+        mDiscussFragment.setArguments(mBundle);
+
+        mFragmetns = new ArrayList<>();
+        mFragmetns.add(mIntroFragment);
+        mFragmetns.add(mDiscussFragment);
+
         list = new ArrayList<>();
         list.add("简介");
         list.add("评论");
@@ -81,9 +106,9 @@ public class VideoActivity extends AppCompatActivity {
             tablayout.addTab(tablayout.newTab().setText(list.get(i)));
         }
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-//        viewpager.setAdapter(adapter);
-//        tablayout.setupWithViewPager(viewpager);
-//        tablayout.setTabsFromPagerAdapter(adapter);
+        viewpager.setAdapter(adapter);
+        tablayout.setupWithViewPager(viewpager);
+        tablayout.setTabsFromPagerAdapter(adapter);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,12 +130,12 @@ public class VideoActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return null;
+            return mFragmetns.get(position);
         }
 
         @Override
         public int getCount() {
-            return list.size();
+            return mFragmetns.size();
         }
     }
 

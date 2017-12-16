@@ -1,28 +1,25 @@
-package mycode.xin.com.seven_wying.mvp.special;
+package mycode.xin.com.seven_wying.mvp.intro;
 
 import javax.inject.Inject;
 
 import io.reactivex.Flowable;
 import mycode.xin.com.seven_wying.bean.IntroBean;
-import mycode.xin.com.seven_wying.bean.VideoRes;
 import mycode.xin.com.seven_wying.utils.Api;
 import mycode.xin.com.seven_wying.utils.ApiService;
 import mycode.xin.com.seven_wying.utils.RetrofitUtils;
 
 /**
- * date:2017/12/12  22:46
- * author:Mr.XIn💕
+ * data:2017/12/15
+ * auther:admin
  */
 
-
-public class SpcialModel {
+public class IntroModel {
     @Inject
-    public SpcialModel() {
+    public IntroModel() {
     }
-
-    public Flowable<VideoRes> getDataSpecial(String Id, String pum) {
+    public Flowable<IntroBean> getDataIntro(String Id) {
         ApiService apiService = RetrofitUtils.getInstance().getApiService(Api.HOST, ApiService.class);
-        Flowable<VideoRes> specialData = apiService.getSpecial(Id);
-        return specialData;
+        Flowable<IntroBean> introData = apiService.getIntroData(Id);
+        return introData;
     }
 }
