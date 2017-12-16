@@ -8,9 +8,11 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
+import com.jaeger.library.StatusBarUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StatusBarUtil.setTranslucent(MainActivity.this);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         mChoicenessFragment = new ChoicenessFragment();
@@ -48,11 +51,10 @@ public class MainActivity extends AppCompatActivity {
         }
         changeFragment(mChoicenessFragment);
 
-
         mBnb.setMode(BottomNavigationBar.MODE_FIXED)
                 .setActiveColor("#FFFF0000")
                 .setInActiveColor("#B3B3B3")
-                .addItem(new BottomNavigationItem(R.drawable.found_select, "精选")//这里表示选中的图片
+                .addItem(new BottomNavigationItem(R.drawable.found_select, "精选")
                         .setInactiveIconResource(R.drawable.found))
                 .addItem(new BottomNavigationItem(R.drawable.special_select, "专题")
                         .setInactiveIconResource(R.drawable.special))

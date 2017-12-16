@@ -57,6 +57,10 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:26.+'
     //xrecyclerView
     compile 'com.jcodecraeer:xrecyclerview:1.3.2'
+    //tablayout
+    compile 'com.android.support:design:25.3.1'
+    compile 'cn.jzvd:jiaozivideoplayer:6.0.0'
+    compile 'com.jaeger.statusbaruitl:library:1.3.5'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.2.0'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'

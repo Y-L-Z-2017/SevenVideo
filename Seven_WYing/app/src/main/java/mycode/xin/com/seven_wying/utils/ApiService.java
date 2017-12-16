@@ -1,8 +1,12 @@
 package mycode.xin.com.seven_wying.utils;
 
+import javax.inject.Inject;
+
 import io.reactivex.Flowable;
 import mycode.xin.com.seven_wying.bean.DiscoverBean;
 import mycode.xin.com.seven_wying.bean.HomeBean;
+import mycode.xin.com.seven_wying.bean.IntroBean;
+import mycode.xin.com.seven_wying.bean.VideoRes;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
@@ -19,7 +23,15 @@ public interface ApiService {
     @GET("homePageApi/homePage.do")
     Flowable<HomeBean> getHomeData();
 
+
     //发现
     @GET("columns/getVideoList.do")
     Flowable<DiscoverBean> getDiscoverData(@Query("catalogId") String catalogId,@Query("pnum") int pnum);
+
+    @GET("videoDetailApi/videoDetail.do")
+    Flowable<IntroBean> getIntroData(@Query("mediaId") String mediaId);
+
+    @GET("Commentary/getCommentList.do")
+    Flowable<VideoRes> getSpecial(@Query("mediaId") String mediaId);
+
 }
